@@ -4,6 +4,7 @@
 //! trail, so "what did you validate?" is answerable from the JSON alone.
 
 use crate::json::Json;
+use crate::urlparse;
 
 /// URL-safe Base64 alphabet, in index order. A YouTube id is a 64-bit integer
 /// rendered in this alphabet to 11 characters.
@@ -121,7 +122,7 @@ pub fn validate(candidate: &str, mode: EntropyMode) -> VideoIdValidation {
         },
     });
 
-    let has_percent = candidate.contains('%');
+    let has_percent = urlparse::has_percent_encoding(candidate);
     checks.push(Check {
         code: "VID_NO_PERCENT_ENCODING",
         category: "encoding",
@@ -179,8 +180,8 @@ pub fn validate(candidate: &str, mode: EntropyMode) -> VideoIdValidation {
             let detail = match candidate.chars().last() {
                 Some(c) => match ALPHABET.find(c) {
                     Some(i) => format!(
-                        "last char '{c}' has alphabet index {i}; {} of 4 mod-4 residue classes allow it",
-                        if i % 4 == 0 { "index IS" } else { "index is NOT" }
+                        "last char '{c}' has alphabet index {i}; mod-4 residue {} (only residue 0 is legal)",
+                        i % 4
                     ),
                     None => format!("last char '{c}' is not in the alphabet"),
                 },

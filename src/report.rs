@@ -11,7 +11,6 @@ use crate::videoid::VideoIdValidation;
 pub struct Envelope {
     pub json: Json,
     pub verdict: String,
-    pub label: String,
     pub line: String,
     pub details: Vec<String>,
 }
@@ -151,7 +150,7 @@ pub fn build_result(index: usize, source: &str, raw: &str, spec: &Spec) -> Envel
         (
             "input",
             Json::obj(vec![
-                ("raw", Json::str(raw.to_string())),
+                ("raw", Json::str(parsed.raw.clone())), // parser-cleaned provenance, not the argv echo
                 ("shape", Json::str(parsed.shape.as_str())),
             ]),
         ),
@@ -217,7 +216,6 @@ pub fn build_result(index: usize, source: &str, raw: &str, spec: &Spec) -> Envel
     Envelope {
         json,
         verdict: verdict.to_string(),
-        label,
         line,
         details,
     }
@@ -237,7 +235,7 @@ mod tests {
             &spec,
         );
         assert_eq!(env.verdict, "valid"); // `si` is share residue: dropped, not a warning
-        assert_eq!(env.label, "qARrn7G067w");
+        assert!(env.line.contains("qARrn7G067w")); // label lives in the human line only
         let s = env.json.to_pretty();
         assert!(s.contains("\"canonical\": \"https://music.youtube.com/watch?v=qARrn7G067w\""));
         assert!(s.contains("youtu.be/qARrn7G067w"));

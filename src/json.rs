@@ -12,7 +12,6 @@ pub enum Json {
     Null,
     Bool(bool),
     Int(i64),
-    Float(f64),
     Str(String),
     Arr(Vec<Json>),
     Obj(Vec<(String, Json)>),
@@ -67,13 +66,6 @@ impl Json {
             Json::Bool(b) => out.push_str(if *b { "true" } else { "false" }),
             Json::Int(i) => {
                 let _ = write!(out, "{}", i);
-            }
-            Json::Float(f) => {
-                if f.is_finite() {
-                    let _ = write!(out, "{}", f);
-                } else {
-                    out.push_str("null"); // JSON has no NaN/Inf
-                }
             }
             Json::Str(s) => write_escaped(out, s),
             Json::Arr(items) => {

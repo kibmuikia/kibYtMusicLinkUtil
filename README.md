@@ -186,3 +186,7 @@ Overrides: `required=`, `enabled=`, `severity=error|warning|info`.
    explicitly out of scope for phase 1.
 
 ---
+
+## License
+
+This project is licensed under the terms in [LICENSE](LICENSE).

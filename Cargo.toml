@@ -1,0 +1,13 @@
+[package]
+name = "kib-yt-music-link-util"
+version = "0.0.1"
+edition = "2021"
+description = "Offline validator/normalizer for YouTube Music links (phase 1: local only, no network)"
+license = "MIT"
+
+[[bin]]
+name = "kibytm"
+path = "src/main.rs"
+
+[dependencies]
+# intentionally none: phase 1 must build air-gapped and never touch the network

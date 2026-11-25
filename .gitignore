@@ -1,0 +1,6 @@
+.DS_Store
+/logs
+/target
+/output
+**/*.rs.bk
+Cargo.lock.bak

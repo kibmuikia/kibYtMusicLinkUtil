@@ -1,0 +1,10 @@
+# one input per line; '#' comments ignored
+https://music.youtube.com/watch?v=qARrn7G067w
+https://music.youtube.com/watch?v=AHsnSK0quvc&si=Kp9xY2&feature=share
+http://music.youtube.com/watch?v=qARrn7G067w
+https://www.youtube.com/watch?v=qARrn7G067w
+https://youtu.be/AHsnSK0quvc
+https://music.youtube.com/watch/?v=AHsnSK0quvc
+https://music.youtube.com/watch?list=RDAMVMqARrn7G067w
+https://music.youtube.com/watch?v=AHsnSK0quv
+qARrn7G067w
